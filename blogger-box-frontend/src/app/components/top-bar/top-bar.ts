@@ -9,11 +9,11 @@ import { Component } from '@angular/core';
         <a class="navbar-brand" [routerLink]="['/']">
           <i class="bi bi-postcard"></i> Blogger-Box
         </a>
-        <button class="btn btn-outline-primary ms-auto">
-          <i class="bi bi-pencil-square"></i> Write
-        </button>
+        <a class="btn btn-outline-primary ms-auto" [routerLink]="['/add-post']">
+          <i class="bi bi-pencil-square"></i> Post
+        </a>
       </div>
     </nav>
   `
 })
-export class TopBarComponent {}
+export class TopBarComponent { }

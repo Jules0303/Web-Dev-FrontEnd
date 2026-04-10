@@ -5,9 +5,11 @@ import { Category } from '../data/category';
 
 
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class CategoryService {
-    private categoriesUrl = `http://localhost:8080/v1/categories`;
+    private categoriesUrl = `http://localhost:8080/v1/categorie`;
     constructor(private http: HttpClient) { }
     getAll(): Observable<Category[]> {
         return this.http.get<Category[]>(this.categoriesUrl);

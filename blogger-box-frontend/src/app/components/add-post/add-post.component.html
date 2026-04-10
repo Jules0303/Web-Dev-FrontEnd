@@ -1,0 +1,61 @@
+<div class="container mt-5">
+  <h2>Create a New Post</h2>
+  <form [formGroup]="postForm" (ngSubmit)="onSubmit()" class="mt-4">
+    
+    <div class="mb-3">
+      <label for="name" class="form-label">Title</label>
+      <input 
+        type="text" 
+        id="name" 
+        class="form-control" 
+        formControlName="name"
+        [ngClass]="{ 'is-invalid': submitted && f['name'].errors, 'is-valid': submitted && !f['name'].errors }">
+      @if (submitted && f['name'].errors) {
+        <div class="invalid-feedback">
+          @if (f['name'].errors['required']) { <div>Title is required.</div> }
+          @if (f['name'].errors['whitespace']) { <div>Title cannot be only white spaces.</div> }
+          @if (f['name'].errors['minlength']) { <div>Title must be at least 5 characters.</div> }
+          @if (f['name'].errors['maxlength']) { <div>Title cannot exceed 150 characters.</div> }
+        </div>
+      }
+    </div>
+
+    <div class="mb-3">
+      <label for="categoryId" class="form-label">Category</label>
+      <select 
+        id="categoryId" 
+        class="form-select" 
+        formControlName="categoryId"
+        [ngClass]="{ 'is-invalid': submitted && f['categoryId'].errors, 'is-valid': submitted && !f['categoryId'].errors }">
+        <option value="" disabled>Select a category</option>
+        @for (cat of categories; track cat.id) {
+          <option [value]="cat.id">{{ cat.name }}</option>
+        }
+      </select>
+      @if (submitted && f['categoryId'].errors) {
+        <div class="invalid-feedback">
+          Category is required.
+        </div>
+      }
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label">Content</label>
+      <textarea 
+        id="description" 
+        class="form-control" 
+        rows="5"
+        formControlName="description"
+        [ngClass]="{ 'is-invalid': submitted && f['description'].errors, 'is-valid': submitted && !f['description'].errors }"></textarea>
+      @if (submitted && f['description'].errors) {
+        <div class="invalid-feedback">
+          @if (f['description'].errors['required']) { <div>Content is required.</div> }
+          @if (f['description'].errors['whitespace']) { <div>Content cannot be only white spaces.</div> }
+          @if (f['description'].errors['maxlength']) { <div>Content cannot exceed 2500 characters.</div> }
+        </div>
+      }
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit Post</button>
+  </form>
+</div>
